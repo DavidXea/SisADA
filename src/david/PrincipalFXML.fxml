@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.embed.swing.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="raiz" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="david.Principal">
+   <children>
+      <Button fx:id="minhasAvaliacoesBT" layoutX="213.0" layoutY="180.0" mnemonicParsing="false" onAction="#onClickBtMinhasAvaliacoes" prefHeight="73.0" prefWidth="275.0" text="Minhas Avaliações" />
+      <Button fx:id="meuDesempenhoBT" layoutX="213.0" layoutY="320.0" mnemonicParsing="false" onAction="#onClickBtMeuDesempenho" prefHeight="73.0" prefWidth="275.0" text="Meu Desempenho" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#11ff009e" height="28.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="700.0" />
+      <Label layoutX="4.0" layoutY="15.0" prefHeight="0.0" prefWidth="693.0" text="Dashboard" />
+      <SwingNode layoutX="350.0" layoutY="140.0" />
+   </children>
+</AnchorPane>
