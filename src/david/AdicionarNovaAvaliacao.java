@@ -12,9 +12,6 @@ package david;
  */
 
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,8 +31,6 @@ public class AdicionarNovaAvaliacao extends InterfaceUsuario{
         super("AdicionarNovaAvaliacaoFXML.fxml");
     }
     
-    
-    
     private ObservableList<String> disciplinas, medias;
     
     @FXML
@@ -49,7 +44,6 @@ public class AdicionarNovaAvaliacao extends InterfaceUsuario{
     public void initialize(URL location, ResourceBundle resources) { 
         carregaListaDisciplinasMedias();
     }
-
     
     public void carregaListaDisciplinasMedias(){
         disciplinas = FXCollections.observableArrayList("Arquitetura", "POO", "Estrutura");
@@ -64,21 +58,21 @@ public class AdicionarNovaAvaliacao extends InterfaceUsuario{
         try{
             FileWriter arquivo = new FileWriter("Avaliacoes.csv",true);
             PrintWriter pw = new PrintWriter(arquivo);
-            
-            
-            
-            pw.println(comboBoxDisciplina.getSelectionModel().getSelectedItem() + ";"+ textNomeProva.getText() +";"+ textPesoProva.getText() +";"+comboBoxMedias.getSelectionModel().getSelectedItem() + "; " );
+
+            pw.print("\n"+comboBoxDisciplina.getSelectionModel().getSelectedItem() + ";"+ textNomeProva.getText() +";"+ textPesoProva.getText() +";"+comboBoxMedias.getSelectionModel().getSelectedItem() + ";");
             pw.close();
             arquivo.close();
                                 
         }catch(IOException e ){
             e.printStackTrace();
         }
+        
         GerenciadorJanela.obterInstancia().voltar();
     }    
     
     @FXML
     public void onClickVoltaBTMinhasAvaliacoes(){
+        
         GerenciadorJanela.obterInstancia().voltar();
     }
 }

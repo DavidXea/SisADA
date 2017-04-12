@@ -11,12 +11,15 @@
       <Button fx:id="botaoVoltar" layoutX="27.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickVoltaPrincipal" text="Voltar" />
       <TableView fx:id="tableAvaliacoes" layoutX="109.0" layoutY="128.0" prefHeight="200.0" prefWidth="415.0">
         <columns>
-          <TableColumn fx:id="trableColunaNomeProva" prefWidth="75.0" text="Nome" />
-          <TableColumn fx:id="trableColunaDisciplina" prefWidth="75.0" text="Disciplina" />
-            <TableColumn fx:id="trableColunaMedia" prefWidth="75.0" text="Média" />
-            <TableColumn fx:id="trableColunaPeso" prefWidth="75.0" text="Peso" />
-            <TableColumn fx:id="trableColunaMinhaNota" prefWidth="75.0" text="MinhaNota" />
+          <TableColumn fx:id="tableColunaNomeProva" prefWidth="75.0" text="Nome" />
+          <TableColumn fx:id="tableColunaDisciplina" prefWidth="75.0" text="Disciplina" />
+            <TableColumn fx:id="tableColunaMedia" prefWidth="75.0" text="Média" />
+            <TableColumn fx:id="tableColunaPeso" prefWidth="75.0" text="Peso" />
+            <TableColumn fx:id="tableColunaNota" prefWidth="75.0" text="Nota" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </children>
 </AnchorPane>

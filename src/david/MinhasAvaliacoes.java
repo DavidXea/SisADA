@@ -14,6 +14,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import static java.nio.file.Files.list;
+import static java.rmi.Naming.list;
+import java.util.ArrayList;
+import static java.util.Collections.list;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +26,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -31,40 +34,49 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
     FileOutputStream arquivo;
     public MinhasAvaliacoes() throws IOException {
         super("MinhasAvaliacoesFXML.fxml");
-        this.listaAvaliacoes = Avaliacao.obterListaAvaliacoes();
-    }
+    }   
     
     @FXML
     private TableView<Avaliacao> tableAvaliacoes;
     
     @FXML
-    private TableColumn<Avaliacao , String> tableColunaMedia, tableColunaPeso , tableColunaNomeProva , tableColunaMinhaNota;
+    private TableColumn<Avaliacao, String> tableColunaNomeProva;
+    
+    @FXML
+    private TableColumn<Avaliacao , String> tableColunaMedia;
 
+    @FXML
+    private TableColumn<Avaliacao, String> tableColunaPeso;
+    
+    @FXML
+    private TableColumn<Avaliacao , String> tableColunaNota;
+    
+    @FXML
+    private TableColumn<Avaliacao , String> tableColunaDisciplina;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
         try {
             carregaTabelaAvaliacoes();
         } catch (IOException ex) {
             Logger.getLogger(MinhasAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-    
-    private final List<Avaliacao> listaAvaliacoes;
-
+   
     private ObservableList<Avaliacao> observableListaAvaliacoes;
-    
+
     public void carregaTabelaAvaliacoes() throws FileNotFoundException, IOException{
+        
         tableColunaNomeProva.setCellValueFactory(new PropertyValueFactory<>("nome"));
-       
-        observableListaAvaliacoes = FXCollections.observableArrayList(listaAvaliacoes);
+        tableColunaMedia.setCellValueFactory(new PropertyValueFactory<>("media"));
+        tableColunaDisciplina.setCellValueFactory(new PropertyValueFactory<>("disciplina"));
+        tableColunaPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
+        tableColunaNota.setCellValueFactory(new PropertyValueFactory<>("nota"));
+
+        observableListaAvaliacoes = FXCollections.observableArrayList(Avaliacao.obterListaAvaliacoes());
         
         tableAvaliacoes.setItems(observableListaAvaliacoes);
     }
-    
-    
-    
     
     @FXML
     public void onClickVoltaPrincipal(){
