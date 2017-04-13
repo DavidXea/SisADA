@@ -10,12 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  *
@@ -27,65 +22,79 @@ public class Avaliacao {
     private double peso;
     private String media;
     //private char[] media = new char[2];
-    private String nota;
+    private double nota;
     private int identificadorDoArquivo;
     
-
-    
+public static boolean NullOuVazio(String s) {
+            return (s == null || s.trim().equals(""));
+        }
 
         
 public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundException, IOException {
         List<Avaliacao> listAvaliacao = new ArrayList();
     
-        char ch;
+
         String atributo = "";
         double aDouble;
         
         FileReader arquivo =  new FileReader("Avaliacoes.csv");
-        BufferedReader lerArquivo = new BufferedReader(arquivo);
-        
-        String linha = "";
-        
-        while(linha != null){
+        BufferedReader lerString = new BufferedReader(arquivo);
+
+        String linha  = lerString.readLine();
+        int intPercorreString = 0;
+        char divisorDeCelula = ';';
+
+        while(NullOuVazio( linha ) == false ){
+            System.out.print("\nPRINTE DA LINHA|" + linha+ "|");
             Avaliacao a1 = new Avaliacao();
-            for(int i = 1; i<5; i++){
-                
-                while((ch = (char)lerArquivo.read()) != ';'){
-                    atributo += ch;
+            for(int i = 1; i<6; i++){
+                System.out.print("\nNNNNOOOOOTAAAAAAA"+linha.charAt(intPercorreString)+"\n");
+                while( linha.charAt(intPercorreString) != divisorDeCelula){
+                    atributo += linha.charAt(intPercorreString);
                     System.out.print("\n"+atributo);
+                    intPercorreString++;
                 }
-                
+
                 switch (i)
                 {
-                    //Arquitetura;provaum;1;M2;
-                    //Estrutura;provadois;1;M1;
                     case 1:
-                        a1.setDisciplina(atributo);
+                        a1.disciplina = atributo;
                         break;
+                        
                     case 2:
-                        a1.setNome(atributo);
+                        a1.nome = atributo;
                         break;
+                        
                    case 3:
                         aDouble = Double.parseDouble(atributo); 
-                        a1.setPeso(aDouble);
+                        a1.peso= aDouble;
                         break;
+                        
                     case 4:
-                        a1.setMedia(atributo);
+                        a1.media = atributo;
 
                         //li.media[0] = palavra.charAt(0);
                         //li.media[1] = palavra.charAt(1);
                         break;
                     case 5:
-                        a1.setNota(atributo);
+                        System.out.print("NOTAAAAAAAAAA");
+//                        if("".equals(atributo)){
+//                            break;
+//                        }else{
+//                            aDouble = Double.parseDouble(atributo);
+//                            a1.setNota(aDouble);
+//                        }
+
                 }
+                intPercorreString++;
                 atributo = "";
             }
-            System.out.print("\nPRINTE DA LINHA|" + linha+ "|\n");
-            linha = lerArquivo.readLine();
-            System.out.print("\nPRINTE DA LINHA|" + linha+ "|\n");
+            intPercorreString=0;
+            linha = lerString.readLine();
             listAvaliacao.add(a1);
         }
-        lerArquivo.close();
+        lerString.close();
+        arquivo.close();
         return listAvaliacao;
     }
     
@@ -93,25 +102,19 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
         return 0;
     }   
         
+    public void atualizar(){
+        
     
-    public void Salvar(){}
     
-    public void atualizar(){}
+    }
+        
+        
+    public void Salvar(){
     
-    public void setNome(String novoCriterio){
-        this.nome = novoCriterio;
     }
     
-    public String getNome(){
-        return this.nome;
-    }
-    public void setMedia(String novaMedia){
-        this.media = novaMedia;
-    }
+
     
-    public String getMedia(){
-        return this.media;
-    }
     
     public void setDisciplina(String novaDisciplina){
         this.disciplina = novaDisciplina;
@@ -121,19 +124,19 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
         return this.disciplina;
     }
     
-    public void setPeso(double novoPeso){
-        this.peso = novoPeso;
+    public void setNome(String novoNome){
+        this.nome = novoNome;
     }
     
-    public double getPeso(){
-        return this.peso;
+    public String getNome(){
+        return this.nome;
     }
     
-    public void setNota(String novaNota){
+    public void setNota(double novaNota){
         this.nota = novaNota;
     }
     
-    public String getNota(){
+    public double getNota(){
         return this.nota;
     }
 }

@@ -59,7 +59,7 @@ public class AdicionarNovaAvaliacao extends InterfaceUsuario{
             FileWriter arquivo = new FileWriter("Avaliacoes.csv",true);
             PrintWriter pw = new PrintWriter(arquivo);
 
-            pw.print("\n"+comboBoxDisciplina.getSelectionModel().getSelectedItem() + ";"+ textNomeProva.getText() +";"+ textPesoProva.getText() +";"+comboBoxMedias.getSelectionModel().getSelectedItem() + ";");
+            pw.print(comboBoxDisciplina.getSelectionModel().getSelectedItem() + ";"+ textNomeProva.getText() +";"+ textPesoProva.getText() +";"+comboBoxMedias.getSelectionModel().getSelectedItem() + ";"+"\n");
             pw.close();
             arquivo.close();
                                 
