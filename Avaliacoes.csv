@@ -1,4 +1,8 @@
-POO;ProvaUM;1;M1;1
-Arquitetura;ProvaDOIS;2;M2;1
-Estrutura;ProvaTRES;3;M3;1
-Estrutura;ProvaQUATRO;10;M3;1
+POO,ProvaUM,1,M1,12
+Arquitetura,ProvaDOIS,2,M2,5
+Estrutura,ProvaTRES,3,M3,7
+Estrutura,ProvaQUATRO,10,M3,6
+POO,ASDAS,3,M3,
+Estrutura,asdas3,33,M1,
+Arquitetura,dsada,12,M2,
+Arquitetura,asd,1,M1,

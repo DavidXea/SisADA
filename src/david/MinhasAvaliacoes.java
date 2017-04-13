@@ -14,11 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import static java.nio.file.Files.list;
-import static java.rmi.Naming.list;
-import java.util.ArrayList;
-import static java.util.Collections.list;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,6 +56,8 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
         } catch (IOException ex) {
             Logger.getLogger(MinhasAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
+        tableAvaliacoes.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> selecionarItemTableAvaliacoes(newValue));
     }
    
     private ObservableList<Avaliacao> observableListaAvaliacoes;
@@ -78,6 +75,13 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
         tableAvaliacoes.setItems(observableListaAvaliacoes);
     }
     
+    public static int selecionarItemTableAvaliacoes(Avaliacao avaliacao) {
+            System.out.println("Avaliacao selecionado no TableView: " + avaliacao.getNome());
+            int ind = avaliacao.getIdentificadorDoArquivo();
+            return ind;
+    }
+    
+    
     @FXML
     public void onClickVoltaPrincipal(){
         GerenciadorJanela.obterInstancia().voltar();
@@ -85,6 +89,7 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
     
     @FXML
     public void onClickBtInformarNota(){
+        
         GerenciadorJanela.obterInstancia().abreJanela(new InformarNota());
     }    
     

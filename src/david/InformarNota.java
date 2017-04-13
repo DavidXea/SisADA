@@ -10,14 +10,10 @@ package david;
  *
  * @author david
  */
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 
 public class InformarNota extends InterfaceUsuario{
 
@@ -42,6 +38,11 @@ public class InformarNota extends InterfaceUsuario{
     
     @FXML
     public void onClickBtSalvar(){
-        //GerenciadorJanela.obterInstancia().abreJanela(new InformarNota());
+        Avaliacao a1 = new Avaliacao();
+        //MinhasAvaliacoes.selecionarItemTableAvaliacoes();
+        
+        
+        
+        GerenciadorJanela.obterInstancia().abreJanela(new InformarNota());
     }
 }
