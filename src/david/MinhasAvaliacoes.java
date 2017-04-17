@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -56,8 +57,8 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
         } catch (IOException ex) {
             Logger.getLogger(MinhasAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
-        tableAvaliacoes.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> selecionarItemTableAvaliacoes(newValue));
+//        tableAvaliacoes.getSelectionModel().selectedItemProperty().addListener(
+//                (observable, oldValue, newValue) -> selecionarItemTableAvaliacoes(newValue));
     }
    
     private ObservableList<Avaliacao> observableListaAvaliacoes;
@@ -69,18 +70,25 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
         tableColunaDisciplina.setCellValueFactory(new PropertyValueFactory<>("disciplina"));
         tableColunaPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
         tableColunaNota.setCellValueFactory(new PropertyValueFactory<>("nota"));
-
-        observableListaAvaliacoes = FXCollections.observableArrayList(Avaliacao.obterListaAvaliacoes());
         
+        observableListaAvaliacoes = FXCollections.observableArrayList(Avaliacao.obterListaAvaliacoes());
         tableAvaliacoes.setItems(observableListaAvaliacoes);
+                
     }
     
-    public static int selecionarItemTableAvaliacoes(Avaliacao avaliacao) {
-            System.out.println("Avaliacao selecionado no TableView: " + avaliacao.getNome());
-            int ind = avaliacao.getIdentificadorDoArquivo();
-            return ind;
+    @Override
+    public void passaIndice(){
+        GerenciadorJanela.setIndice(tableAvaliacoes.getSelectionModel().getSelectedItem().getIdentificadorDoArquivo());
     }
     
+    @Override
+    public void volteiAtualiza(){
+        try {
+            GerenciadorJanela.obterInstancia().abreJanela(new MinhasAvaliacoes());
+        } catch (IOException ex) {
+            Logger.getLogger(MinhasAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @FXML
     public void onClickVoltaPrincipal(){
@@ -89,14 +97,14 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
     
     @FXML
     public void onClickBtInformarNota(){
+        passaIndice();
         
         GerenciadorJanela.obterInstancia().abreJanela(new InformarNota());
-    }    
-    
+    }
+     
     @FXML
     public void onClickBtAdicionarNovaAvaliacao() throws FileNotFoundException{
         GerenciadorJanela.obterInstancia().abreJanela(new AdicionarNovaAvaliacao());
-    }
-    
+    } 
 }
 

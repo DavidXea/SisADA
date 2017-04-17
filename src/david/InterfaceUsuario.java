@@ -43,5 +43,11 @@ public abstract class InterfaceUsuario implements Initializable {
         }
         return this.minhaCena;
     }
-    
+    public void volteiAtualiza(){
+        
+    }
+    public void passaIndice(){
+        
+    }
 }
+

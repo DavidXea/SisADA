@@ -5,16 +5,18 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="david.MeuDesempenho">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="david.MeuDesempenho">
    <children>
-      <Button fx:id="voltarPrincipalBT" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickVoltaPrincipal" text="Voltar" />
-      <BarChart layoutX="173.0" layoutY="125.0" prefHeight="211.0" prefWidth="285.0">
+      <Button fx:id="voltarPrincipalBT" layoutX="14.0" layoutY="503.0" mnemonicParsing="false" onAction="#onClickVoltaPrincipal" text="Voltar" />
+      <BarChart fx:id="barChart" layoutX="38.0" layoutY="71.0" prefHeight="257.0" prefWidth="331.0" title="Meu Desempenho">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis fx:id="categoryAxis" side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="numberAxis" side="LEFT" />
         </yAxis>
       </BarChart>
+      <ComboBox fx:id="comboBoxDisciplina" layoutX="306.0" layoutY="342.0" prefHeight="25.0" prefWidth="262.0" promptText="Selecione a disciplina..." />
+      <Button layoutX="507.0" layoutY="503.0" mnemonicParsing="false" onAction="#onClickAdd" text="Adicionar" />
    </children>
 </AnchorPane>

@@ -1,20 +1,10 @@
 package david;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author david
  */
 
-
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -47,32 +37,25 @@ public class AdicionarNovaAvaliacao extends InterfaceUsuario{
     
     public void carregaListaDisciplinasMedias(){
         disciplinas = FXCollections.observableArrayList("Arquitetura", "POO", "Estrutura");
-        medias = FXCollections.observableArrayList("M1","M2","M3");
         comboBoxDisciplina.setItems(disciplinas);
+        medias = FXCollections.observableArrayList("M1","M2","M3");
         comboBoxMedias.setItems(medias);
     }
     
     @FXML
-    public void onClickBTSalvarNovaAvaliacao(){
-        
-        try{
-            FileWriter arquivo = new FileWriter("Avaliacoes.csv",true);
-            PrintWriter pw = new PrintWriter(arquivo);
+    public void onClickBTSalvarNovaAvaliacao() throws IOException{
 
-            pw.println(comboBoxDisciplina.getSelectionModel().getSelectedItem() + ","+ textNomeProva.getText() +","+ textPesoProva.getText() +","+comboBoxMedias.getSelectionModel().getSelectedItem() + ","+"-");
-            pw.close();
-            arquivo.close();
-                                
-        }catch(IOException e ){
-            e.printStackTrace();
-        }
+        Avaliacao novaProva = new Avaliacao();
+        novaProva.setNome(textNomeProva.getText());
+        novaProva.setDisciplina(comboBoxDisciplina.getSelectionModel().getSelectedItem());
+        novaProva.setMedia(comboBoxMedias.getSelectionModel().getSelectedItem());
+        novaProva.setPeso(Double.parseDouble(textPesoProva.getText()));
         
-        GerenciadorJanela.obterInstancia().voltar();
+        novaProva.Salvar();
     }    
     
     @FXML
     public void onClickVoltaBTMinhasAvaliacoes(){
-        
         GerenciadorJanela.obterInstancia().voltar();
     }
 }

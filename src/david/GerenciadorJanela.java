@@ -15,12 +15,21 @@ import javafx.stage.Stage;
 
 public class GerenciadorJanela {
     
+    private static int indice;
+    
     private static GerenciadorJanela instancia;
     
-    private GerenciadorJanela(){
+    GerenciadorJanela(){
         this.pilhaRetorno = new Stack<>();
     }
     
+    public static void setIndice(int novoIndice){
+         GerenciadorJanela.indice = novoIndice;
+    }
+    
+    public static int getIndice(){
+        return GerenciadorJanela.indice;
+    }
     public static GerenciadorJanela obterInstancia(){
         if(GerenciadorJanela.instancia == null){
             GerenciadorJanela.instancia = new GerenciadorJanela();
@@ -47,14 +56,16 @@ public class GerenciadorJanela {
         this.pilhaRetorno.push(this.janelaAtual);
         this.getPalco().setScene(novaJanela.obterCena());
         this.janelaAtual = novaJanela;
-        System.out.println(this.pilhaRetorno.size());
+        //System.out.println(this.pilhaRetorno.size());
     }
+    
     
     public void voltar() {
         if(!this.pilhaRetorno.empty()){
             InterfaceUsuario anterior = this.pilhaRetorno.pop();
             this.getPalco().setScene(anterior.obterCena());
             this.janelaAtual = anterior;
+            this.janelaAtual.volteiAtualiza();
             return;
         }
         System.err.println("A pilha de retorno vazia");
