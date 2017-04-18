@@ -17,7 +17,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,7 +65,7 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
     public void carregaTabelaAvaliacoes() throws FileNotFoundException, IOException{
         
         tableColunaNomeProva.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColunaMedia.setCellValueFactory(new PropertyValueFactory<>("media"));
+        tableColunaMedia.setCellValueFactory(new PropertyValueFactory<>("mediaString"));
         tableColunaDisciplina.setCellValueFactory(new PropertyValueFactory<>("disciplina"));
         tableColunaPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
         tableColunaNota.setCellValueFactory(new PropertyValueFactory<>("nota"));
@@ -76,10 +75,10 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
                 
     }
     
-    @Override
-    public void passaIndice(){
-        GerenciadorJanela.setIndice(tableAvaliacoes.getSelectionModel().getSelectedItem().getIdentificadorDoArquivo());
-    }
+//    @Override
+//    public void passaIndice(){
+//        GerenciadorJanela.setIndice(tableAvaliacoes.getSelectionModel().getSelectedItem().getIdentificadorDoArquivo());
+//    }
     
     @Override
     public void volteiAtualiza(){
@@ -97,9 +96,12 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
     
     @FXML
     public void onClickBtInformarNota(){
-        passaIndice();
-        
-        GerenciadorJanela.obterInstancia().abreJanela(new InformarNota());
+//        passaIndice();
+        Avaliacao itemSelecionada = (Avaliacao) tableAvaliacoes.getSelectionModel().getSelectedItem();
+        InformarNota telaInformaNota = new InformarNota();
+        telaInformaNota.setAvaliacaoDaVez(itemSelecionada);
+                
+        GerenciadorJanela.obterInstancia().abreJanela(telaInformaNota);
     }
      
     @FXML

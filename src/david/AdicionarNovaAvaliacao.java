@@ -48,7 +48,7 @@ public class AdicionarNovaAvaliacao extends InterfaceUsuario{
         Avaliacao novaProva = new Avaliacao();
         novaProva.setNome(textNomeProva.getText());
         novaProva.setDisciplina(comboBoxDisciplina.getSelectionModel().getSelectedItem());
-        novaProva.setMedia(comboBoxMedias.getSelectionModel().getSelectedItem());
+        novaProva.setMedia(comboBoxMedias.getSelectionModel().getSelectedItem().toCharArray());
         novaProva.setPeso(Double.parseDouble(textPesoProva.getText()));
         
         novaProva.Salvar();

@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="raiz" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="david.Principal">
+<AnchorPane fx:id="raiz" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <Button fx:id="minhasAvaliacoesBT" layoutX="213.0" layoutY="180.0" mnemonicParsing="false" onAction="#onClickBtMinhasAvaliacoes" prefHeight="73.0" prefWidth="275.0" text="Minhas Avaliações" />
       <Button fx:id="meuDesempenhoBT" layoutX="213.0" layoutY="320.0" mnemonicParsing="false" onAction="#onClickBtMeuDesempenho" prefHeight="73.0" prefWidth="275.0" text="Meu Desempenho" />

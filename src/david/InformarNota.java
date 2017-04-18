@@ -21,20 +21,24 @@ public class InformarNota extends InterfaceUsuario{
 
     @FXML
     private Label labelNomeProva, labelDisciplina, labelMedia;
+    
+    private Avaliacao avaliacaoDaVez;
 
     public InformarNota() {
         super("InformarNotaFXML.fxml");
     }
     
+    public void setAvaliacaoDaVez(Avaliacao avaliacaoDaVez){
+        this.avaliacaoDaVez = avaliacaoDaVez;
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            labelNomeProva.setText("Nome : "+Avaliacao.obterListaAvaliacoes().get(GerenciadorJanela.getIndice()).getNome());
-            labelDisciplina.setText("Disciplina : "+Avaliacao.obterListaAvaliacoes().get(GerenciadorJanela.getIndice()).getDisciplina());
-            labelMedia.setText("Media : "+Avaliacao.obterListaAvaliacoes().get(GerenciadorJanela.getIndice()).getMedia());
-        } catch (IOException ex) {
-            Logger.getLogger(InformarNota.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+            labelNomeProva.setText("Nome : "+this.avaliacaoDaVez.getNome());
+            labelDisciplina.setText("Disciplina : "+this.avaliacaoDaVez.getDisciplina());
+            labelMedia.setText("Media : "+this.avaliacaoDaVez.getMediaString());
+        
     }
     
     @FXML
@@ -44,8 +48,9 @@ public class InformarNota extends InterfaceUsuario{
     
     @FXML
     public void onClickBtSalvar() throws IOException{
-        Avaliacao novaNota = new Avaliacao();
-        novaNota.setNota(Double.parseDouble(textNotaProva.getText()));
-        novaNota.atualizar();
+//        Avaliacao novaNota = new Avaliacao();
+        
+        avaliacaoDaVez.setNota(Double.parseDouble(textNotaProva.getText()));
+        avaliacaoDaVez.atualizar();
     }
 }

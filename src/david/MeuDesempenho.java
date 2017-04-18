@@ -6,16 +6,14 @@ package david;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.ComboBox;
 
 public class MeuDesempenho extends InterfaceUsuario{
@@ -41,36 +39,33 @@ public class MeuDesempenho extends InterfaceUsuario{
     @FXML
     private NumberAxis numberAxis;
 
-    //private ObservableList<String> observablelistDisciplinas = FXCollections.observableArrayList();
     
-    XYChart.Series series = new XYChart.Series<>();
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-            carregaListaDisciplinasMedias();
+        barChart.setAnimated(false);
+        carregaListaDisciplinasMedias();
             
     }
     
     public void carregaListaDisciplinasMedias(){
         disciplinas = FXCollections.observableArrayList("Arquitetura", "POO", "Estrutura");
-        //medias = FXCollections.observableArrayList("M1","M2","M3");
         comboBoxDisciplina.setItems(disciplinas);
-        //comboBoxMedias.setItems(medias);
     }
     
     
     @FXML
     public void onClickAdd() throws FileNotFoundException{
         
-        //addItem.add(comboBoxDisciplina.getSelectionModel().getSelectedItem());
-        System.out.print(Avaliacao.calculaMediaDisciplina( comboBoxDisciplina.getSelectionModel().getSelectedItem() , "Media") );
+        System.out.print(Avaliacao.calculaMediaDisciplina( comboBoxDisciplina.getSelectionModel().getSelectedItem() , "M2") );
         
-        //categoryAxis.setCategories(addItem);
-        //numberAxis.setTickUnit(11);
-        
-        series.getData().add(new XYChart.Data(comboBoxDisciplina.getSelectionModel().getSelectedItem() , Avaliacao.calculaMediaDisciplina( comboBoxDisciplina.getSelectionModel().getSelectedItem() , "Media")));
-        
-        barChart.getData().add(series);
+        XYChart.Series series = new XYChart.Series<>();
+        series.setName(comboBoxDisciplina.getSelectionModel().getSelectedItem());
+        barChart.setLegendSide(Side.RIGHT);
+        series.getData().add(new XYChart.Data("M1" , Avaliacao.calculaMediaDisciplina( comboBoxDisciplina.getSelectionModel().getSelectedItem() , "M1")));
+        series.getData().add(new XYChart.Data("M2" , Avaliacao.calculaMediaDisciplina( comboBoxDisciplina.getSelectionModel().getSelectedItem() , "M2")));
+        series.getData().add(new XYChart.Data("M3" , Avaliacao.calculaMediaDisciplina( comboBoxDisciplina.getSelectionModel().getSelectedItem() , "M3")));
+        barChart.getData().addAll(series);
     }
     
     @FXML

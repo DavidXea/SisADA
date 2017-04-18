@@ -20,8 +20,8 @@ public class Avaliacao {
     private String nome;
     private String disciplina;
     private double peso;
-    private String media;
-    //private char[] media = new char[2];
+    //private String media;
+    private char[] media;
     private double nota ;
     private int identificadorDoArquivo;
    
@@ -30,23 +30,21 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
         
         List<Avaliacao> listAvaliacao = new ArrayList();
         String tamanhoString;
-        double aDouble;
         int contador = 0;
+        
         try (Scanner scanner = new Scanner(new FileReader("Avaliacoes.csv")).useDelimiter("\\,|\\n")) {
             while( scanner.hasNext() ){
                 
                 Avaliacao a1 = new Avaliacao();
                 a1.identificadorDoArquivo = contador;
                 a1.disciplina = scanner.next();
-                a1.media = scanner.next();
+                a1.media = scanner.next().toCharArray();
                 a1.nome = scanner.next();
-                aDouble = Double.parseDouble(scanner.next());
-                a1.peso= aDouble;
+                a1.peso= Double.parseDouble(scanner.next());
                 tamanhoString = scanner.next();
                 if(tamanhoString.length()<= 1 ){
                 }else{
-                    aDouble = Double.parseDouble(tamanhoString);
-                    a1.nota = aDouble;
+                    a1.nota = Double.parseDouble(tamanhoString);
                 }
                 contador++;
                 listAvaliacao.add(a1);
@@ -58,13 +56,13 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
     public static double calculaMediaDisciplina(String dis, String med) throws FileNotFoundException{
         
         Scanner scanner = new Scanner(new FileReader("Avaliacoes.csv")).useDelimiter("\\,|\\n");
+        
         double nota;
         double p = 0;
         double MX = 0;
         int cont = 0;
         
         while( scanner.hasNext() ) {
-            //disciplina,media,nome_da_avaliação,peso[,nota_obtida]
             if(dis.equals(scanner.next())){
                 
                 if(med.equals(scanner.next())){
@@ -84,13 +82,12 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
     
         
     public void atualizar() throws IOException{
-        int indice = GerenciadorJanela.getIndice();
-        System.out.print("\nIndiceDoGerenciadorJanelas AAAA: "+identificadorDoArquivo+"\n");
+        int indice = this.identificadorDoArquivo;
         Path path = Paths.get("Avaliacoes.csv");
         List<String> linhas = Files.readAllLines(path);
         
         
-        String novoConteudo = linhas.get(indice).substring(0, linhas.get(indice).length()) + getNota();
+        String novoConteudo = getDisciplina() + ","+getMediaString()+","+getNome() +","+getPeso()+","+ getNota();
         linhas.remove(indice);
         linhas.add(indice, novoConteudo);
         Files.write(path, linhas);
@@ -103,7 +100,7 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
             FileWriter arquivo = new FileWriter("Avaliacoes.csv",true);
             PrintWriter pw = new PrintWriter(arquivo);
 
-            pw.println(getDisciplina() + "," +getMedia() +","+getNome() +","+getPeso()+",");
+            pw.println(getDisciplina() + "," +getMediaString() +","+getNome() +","+getPeso()+",");
             pw.close();
             arquivo.close();
             
@@ -113,10 +110,13 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
     
     
     //GETs AND SETs
-    public void setMedia(String novaMedia){
+    public void setMedia(char[] novaMedia){
         this.media = novaMedia;
     }
-    public String getMedia(){
+    public String getMediaString(){
+        return String.valueOf(this.media);
+    }
+    public char[] getMedia(){
         return this.media;
     }
     public void setIdentificadorDoArquivo(int novoIndicador){
