@@ -1,11 +1,4 @@
 package david;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author david
@@ -23,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 public class MinhasAvaliacoes extends InterfaceUsuario {
     
@@ -51,13 +45,14 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
         try {
             carregaTabelaAvaliacoes();
+            
         } catch (IOException ex) {
             Logger.getLogger(MinhasAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        tableAvaliacoes.getSelectionModel().selectedItemProperty().addListener(
-//                (observable, oldValue, newValue) -> selecionarItemTableAvaliacoes(newValue));
+
     }
    
     private ObservableList<Avaliacao> observableListaAvaliacoes;
@@ -75,19 +70,6 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
                 
     }
     
-//    @Override
-//    public void passaIndice(){
-//        GerenciadorJanela.setIndice(tableAvaliacoes.getSelectionModel().getSelectedItem().getIdentificadorDoArquivo());
-//    }
-    
-    @Override
-    public void volteiAtualiza(){
-        try {
-            GerenciadorJanela.obterInstancia().abreJanela(new MinhasAvaliacoes());
-        } catch (IOException ex) {
-            Logger.getLogger(MinhasAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     @FXML
     public void onClickVoltaPrincipal(){
@@ -96,12 +78,20 @@ public class MinhasAvaliacoes extends InterfaceUsuario {
     
     @FXML
     public void onClickBtInformarNota(){
-//        passaIndice();
+            if(tableAvaliacoes.getSelectionModel().getSelectedItem() == null ){
+            Alert aviso = new Alert(Alert.AlertType.INFORMATION);
+            aviso.setTitle("Erro");
+            aviso.setHeaderText("ITEM NÃO SELECIONADO");
+            aviso.setContentText("É NECESSARIO SELECIONAR UMA PROVA PARA ADICIONAR UMA NOTA ");
+            aviso.showAndWait();
+        }else{
         Avaliacao itemSelecionada = (Avaliacao) tableAvaliacoes.getSelectionModel().getSelectedItem();
         InformarNota telaInformaNota = new InformarNota();
         telaInformaNota.setAvaliacaoDaVez(itemSelecionada);
                 
         GerenciadorJanela.obterInstancia().abreJanela(telaInformaNota);
+        }
+
     }
      
     @FXML

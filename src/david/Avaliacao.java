@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -53,31 +54,40 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
         return listAvaliacao;
     }
     
-    public static double calculaMediaDisciplina(String dis, String med) throws FileNotFoundException{
-        
-        Scanner scanner = new Scanner(new FileReader("Avaliacoes.csv")).useDelimiter("\\,|\\n");
-        
-        double nota;
-        double p = 0;
-        double MX = 0;
-        int cont = 0;
-        
-        while( scanner.hasNext() ) {
-            if(dis.equals(scanner.next())){
-                
-                if(med.equals(scanner.next())){
-                    
-                    scanner.next();
-                    p = Double.parseDouble(scanner.next());
-                    nota = Double.parseDouble(scanner.next());
-                    MX +=nota*p;
-                    cont+=p;
+    public static double calculaMediaDisciplina(String dis, String med) throws FileNotFoundException, IOException{
+        List<Avaliacao> listaAvaliacao =  Avaliacao.obterListaAvaliacoes();
+
+        double sPeso = 0;
+        double sNota = 0;
+        int verfDis = listaAvaliacao.size();
+
+        for(int i = 0 ; i <listaAvaliacao.size()  ; i++ ){      
+            if(listaAvaliacao.get(i).getDisciplina().equals(dis)){
+                if(listaAvaliacao.get(i).getMediaString().equals(med)){
+                    if(listaAvaliacao.get(i).getNota() == 0){
+                        System.out.println("ENTROU PARA CALCULAR MEDIA 0");
+                        Alert aviso = new Alert(Alert.AlertType.INFORMATION);
+                        aviso.setTitle("Erro");
+                        aviso.setHeaderText("A prova "+listaAvaliacao.get(i).getNome()+" da disciplina "+listaAvaliacao.get(i).getDisciplina() +" não tem nota informada e ou foi adicionado uma nota 0");
+                        aviso.setContentText("A media "+med+" da disciplina "+listaAvaliacao.get(i).getNome()+" foi calculada com uma nota 0.0 : ");
+                        aviso.showAndWait();
+                        sNota += listaAvaliacao.get(i).getNota() * listaAvaliacao.get(i).getPeso();
+                        sPeso += listaAvaliacao.get(i).getPeso();
+                    }else{
+                        System.out.println("ENTROU PARA CALCULAR MEDIA > 0");
+                        sNota += listaAvaliacao.get(i).getNota() * listaAvaliacao.get(i).getPeso();
+                        sPeso += listaAvaliacao.get(i).getPeso();
+                    }
                 }
             }else{
-                scanner.nextLine();
+                verfDis--;
             }
         }
-        return MX/cont;
+        if(verfDis == 0 ){
+                return -1;
+        }
+        
+        return sNota/sPeso;
     }
     
         
@@ -91,8 +101,10 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
         linhas.remove(indice);
         linhas.add(indice, novoConteudo);
         Files.write(path, linhas);
-
+        
+        GerenciadorJanela.obterInstancia().pilhaRetorno.pop();
         GerenciadorJanela.obterInstancia().abreJanela(new MinhasAvaliacoes());
+        GerenciadorJanela.obterInstancia().pilhaRetorno.pop();
     }
         
     public void Salvar() throws IOException{
@@ -104,7 +116,9 @@ public static List<Avaliacao> obterListaAvaliacoes() throws FileNotFoundExceptio
             pw.close();
             arquivo.close();
             
-            GerenciadorJanela.obterInstancia().abreJanela(new MinhasAvaliacoes());
+        GerenciadorJanela.obterInstancia().pilhaRetorno.pop();
+        GerenciadorJanela.obterInstancia().abreJanela(new MinhasAvaliacoes());
+        GerenciadorJanela.obterInstancia().pilhaRetorno.pop();
     }
     
     

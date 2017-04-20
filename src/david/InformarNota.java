@@ -8,9 +8,8 @@ package david;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -38,7 +37,6 @@ public class InformarNota extends InterfaceUsuario{
             labelNomeProva.setText("Nome : "+this.avaliacaoDaVez.getNome());
             labelDisciplina.setText("Disciplina : "+this.avaliacaoDaVez.getDisciplina());
             labelMedia.setText("Media : "+this.avaliacaoDaVez.getMediaString());
-        
     }
     
     @FXML
@@ -48,9 +46,15 @@ public class InformarNota extends InterfaceUsuario{
     
     @FXML
     public void onClickBtSalvar() throws IOException{
-//        Avaliacao novaNota = new Avaliacao();
-        
-        avaliacaoDaVez.setNota(Double.parseDouble(textNotaProva.getText()));
-        avaliacaoDaVez.atualizar();
+        if("".equals(textNotaProva.getText())){
+            Alert aviso = new Alert(Alert.AlertType.INFORMATION);
+            aviso.setTitle("Erro");
+            aviso.setHeaderText("CAMPO VAZIO");
+            aviso.setContentText("É NECESSARIO IMFORMAR A NOTA");
+            aviso.showAndWait();
+        }else{
+            avaliacaoDaVez.setNota(Double.parseDouble(textNotaProva.getText()));
+            avaliacaoDaVez.atualizar();
+        }     
     }
 }

@@ -8,21 +8,12 @@ import javafx.stage.Stage;
 
 public class GerenciadorJanela {
     
-    private static int indice;
-    
     private static GerenciadorJanela instancia;
     
     GerenciadorJanela(){
         this.pilhaRetorno = new Stack<>();
     }
-    
-    public static void setIndice(int novoIndice){
-         GerenciadorJanela.indice = novoIndice;
-    }
-    
-    public static int getIndice(){
-        return GerenciadorJanela.indice;
-    }
+
     public static GerenciadorJanela obterInstancia(){
         if(GerenciadorJanela.instancia == null){
             GerenciadorJanela.instancia = new GerenciadorJanela();
@@ -31,7 +22,7 @@ public class GerenciadorJanela {
     }
     
     private Stage palco;
-    private Stack<InterfaceUsuario> pilhaRetorno;
+    protected Stack<InterfaceUsuario> pilhaRetorno;
     private InterfaceUsuario janelaAtual;
     
     public void inicializaPalco(Stage p, InterfaceUsuario interfaceInicial){
@@ -51,7 +42,6 @@ public class GerenciadorJanela {
         this.janelaAtual = novaJanela;
         //System.out.println(this.pilhaRetorno.size());
     }
-    
     
     public void voltar() {
         if(!this.pilhaRetorno.empty()){

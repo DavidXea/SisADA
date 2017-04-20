@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="InformarNotaBT" layoutX="51.0" layoutY="64.0" mnemonicParsing="false" onAction="#onClickBtInformarNota" prefHeight="25.0" prefWidth="200.0" text="Informar nota" />
-      <Button fx:id="adicionarNovaAvaliacaoBT" layoutX="379.0" layoutY="64.0" mnemonicParsing="false" onAction="#onClickBtAdicionarNovaAvaliacao" prefHeight="25.0" prefWidth="200.0" text="Adicionar nova avaliação" />
-      <Button fx:id="botaoVoltar" layoutX="27.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickVoltaPrincipal" text="Voltar" />
-      <TableView fx:id="tableAvaliacoes" layoutX="109.0" layoutY="128.0" prefHeight="200.0" prefWidth="415.0">
+      <Button fx:id="InformarNotaBT" layoutX="91.0" layoutY="75.0" mnemonicParsing="false" onAction="#onClickBtInformarNota" prefHeight="45.0" prefWidth="300.0" text="Informar nota">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="adicionarNovaAvaliacaoBT" layoutX="635.0" layoutY="75.0" mnemonicParsing="false" onAction="#onClickBtAdicionarNovaAvaliacao" prefHeight="45.0" prefWidth="300.0" text="Adicionar nova avaliação">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="botaoVoltar" layoutX="35.0" layoutY="702.0" mnemonicParsing="false" onAction="#onClickVoltaPrincipal" prefHeight="45.0" prefWidth="150.0" text="Voltar" />
+      <TableView fx:id="tableAvaliacoes" layoutX="91.0" layoutY="217.0" prefHeight="384.0" prefWidth="844.0">
         <columns>
           <TableColumn fx:id="tableColunaNomeProva" prefWidth="75.0" text="Nome" />
           <TableColumn fx:id="tableColunaDisciplina" prefWidth="75.0" text="Disciplina" />
@@ -21,5 +29,11 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#11ff009e" height="28.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+      <Label layoutX="8.0" layoutY="1.0" text="MINHAS AVALIAÇÕES">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
